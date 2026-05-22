@@ -1,0 +1,62 @@
+{
+  "India": {
+    "typicalPorts": ["New York", "Chicago", "San Francisco", "New Jersey"],
+    "settlementRegions": ["California", "New Jersey", "Texas", "Illinois"],
+    "keyYears": [1965, 1968, 1986, 1990],
+    "narrative": "After the 1965 Immigration Act ended national-origin quotas, Indian immigration accelerated through family reunification and skilled-worker visas."
+  },
+  "China": {
+    "typicalPorts": ["San Francisco", "Los Angeles", "New York"],
+    "settlementRegions": ["California", "New York", "Washington"],
+    "keyYears": [1965, 1979, 1990],
+    "narrative": "Chinese-American communities expanded as immigration policy opened and diplomatic relations evolved."
+  },
+  "Mexico": {
+    "typicalPorts": ["El Paso", "Los Angeles", "San Diego"],
+    "settlementRegions": ["California", "Texas", "Arizona"],
+    "keyYears": [1965, 1986, 1990],
+    "narrative": "Mexican migration has deep regional roots, with major policy shifts in 1965 and 1986 reform."
+  },
+  "Ireland": {
+    "typicalPorts": ["Ellis Island", "New York", "Boston"],
+    "settlementRegions": ["New York", "Massachusetts", "Pennsylvania"],
+    "keyYears": [1845, 1900, 1924],
+    "narrative": "Irish migration peaked during the Great Famine era and early 20th century, before quota restrictions."
+  },
+  "Italy": {
+    "typicalPorts": ["Ellis Island", "New York"],
+    "settlementRegions": ["New York", "New Jersey", "Pennsylvania"],
+    "keyYears": [1880, 1910, 1924],
+    "narrative": "Italian immigrants arrived in large numbers through Ellis Island before the 1924 quota system."
+  },
+  "England": {
+    "typicalPorts": ["New York", "Virginia Colony"],
+    "settlementRegions": ["Virginia", "Massachusetts", "Pennsylvania"],
+    "keyYears": [1607, 1700, 1800],
+    "narrative": "English settlement shaped colonial America long before modern immigration law."
+  },
+  "Scotland": {
+    "typicalPorts": ["New York", "Philadelphia"],
+    "settlementRegions": ["Pennsylvania", "North Carolina"],
+    "keyYears": [1700, 1850, 1900],
+    "narrative": "Scottish immigrants often entered through mid-Atlantic ports and Appalachian settlements."
+  },
+  "Japan": {
+    "typicalPorts": ["San Francisco", "Seattle", "Los Angeles"],
+    "settlementRegions": ["California", "Hawaii", "Washington"],
+    "keyYears": [1900, 1965, 1980],
+    "narrative": "Japanese-American history includes early labor migration, internment, and post-1965 renewal."
+  },
+  "South Korea": {
+    "typicalPorts": ["Los Angeles", "Seattle", "New York"],
+    "settlementRegions": ["California", "New York", "Virginia"],
+    "keyYears": [1965, 1975, 1990],
+    "narrative": "Korean immigration grew after 1965, with additional waves tied to political and economic change."
+  },
+  "default": {
+    "typicalPorts": ["New York", "Los Angeles"],
+    "settlementRegions": ["California", "New York", "Texas"],
+    "keyYears": [1965, 1990],
+    "narrative": "Post-1965 immigration policy reshaped who could enter the United States and where families settled."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "pandya": {
+    "country": "India",
+    "region": "Gujarat",
+    "notes": "Surname associated with the historical Pandya dynasty and Gujarati communities."
+  },
+  "patel": {
+    "country": "India",
+    "region": "Gujarat",
+    "notes": "Among the most common Indian-American surnames, especially after 1965."
+  },
+  "shah": {
+    "country": "India",
+    "region": "Gujarat",
+    "notes": "Common in Gujarati diaspora communities."
+  },
+  "kumar": {
+    "country": "India",
+    "region": "North India",
+    "notes": "Widely used across South Asia."
+  },
+  "singh": {
+    "country": "India",
+    "region": "Punjab",
+    "notes": "Strong ties to Punjabi migration waves."
+  },
+  "garcia": {
+    "country": "Mexico",
+    "region": "Mexico",
+    "notes": "One of the most common Hispanic surnames in the U.S."
+  },
+  "o'brien": {
+    "country": "Ireland",
+    "region": "Ireland",
+    "notes": "Irish diaspora migration peaked in the 19th century."
+  },
+  "rossi": {
+    "country": "Italy",
+    "region": "Italy",
+    "notes": "Italian immigration through Ellis Island era."
+  },
+  "chen": {
+    "country": "China",
+    "region": "China",
+    "notes": "Chinese-American communities grew significantly after 1965."
+  },
+  "kim": {
+    "country": "South Korea",
+    "region": "South Korea",
+    "notes": "Korean immigration increased after the 1965 Act and 1990 reforms."
+  },
+  "washington": {
+    "country": "England",
+    "region": "England",
+    "notes": "Colonial-era English settlement in Virginia."
+  }
+}

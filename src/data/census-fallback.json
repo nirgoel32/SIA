@@ -1,0 +1,78 @@
+{
+  "foreignBorn": [
+    { "year": 1960, "population": 9760000 },
+    { "year": 1970, "population": 9600000 },
+    { "year": 1980, "population": 14300000 },
+    { "year": 1990, "population": 19700000 },
+    { "year": 2000, "population": 28100000 },
+    { "year": 2010, "population": 40000000 },
+    { "year": 2020, "population": 45100000 }
+  ],
+  "ancestry": {
+    "India": [
+      { "year": 1960, "population": 12000 },
+      { "year": 1970, "population": 51000 },
+      { "year": 1980, "population": 206000 },
+      { "year": 1990, "population": 570000 },
+      { "year": 2000, "population": 1690000 },
+      { "year": 2010, "population": 3190000 },
+      { "year": 2020, "population": 4390000 }
+    ],
+    "Mexico": [
+      { "year": 1960, "population": 600000 },
+      { "year": 1970, "population": 760000 },
+      { "year": 1980, "population": 1670000 },
+      { "year": 1990, "population": 4800000 },
+      { "year": 2000, "population": 9300000 },
+      { "year": 2010, "population": 11700000 },
+      { "year": 2020, "population": 12800000 }
+    ],
+    "China": [
+      { "year": 1960, "population": 237000 },
+      { "year": 1970, "population": 237000 },
+      { "year": 1980, "population": 812000 },
+      { "year": 1990, "population": 1650000 },
+      { "year": 2000, "population": 2430000 },
+      { "year": 2010, "population": 3340000 },
+      { "year": 2020, "population": 4090000 }
+    ],
+    "Ireland": [
+      { "year": 1960, "population": 1700000 },
+      { "year": 1970, "population": 1500000 },
+      { "year": 1980, "population": 1300000 },
+      { "year": 1990, "population": 1200000 },
+      { "year": 2000, "population": 1100000 },
+      { "year": 2010, "population": 1000000 },
+      { "year": 2020, "population": 950000 }
+    ],
+    "Italy": [
+      { "year": 1960, "population": 1600000 },
+      { "year": 1970, "population": 1500000 },
+      { "year": 1980, "population": 1400000 },
+      { "year": 1990, "population": 1300000 },
+      { "year": 2000, "population": 1200000 },
+      { "year": 2010, "population": 1100000 },
+      { "year": 2020, "population": 1000000 }
+    ],
+    "default": [
+      { "year": 1960, "population": 500000 },
+      { "year": 1970, "population": 800000 },
+      { "year": 1980, "population": 1500000 },
+      { "year": 1990, "population": 2800000 },
+      { "year": 2000, "population": 4200000 },
+      { "year": 2010, "population": 5800000 },
+      { "year": 2020, "population": 7200000 }
+    ]
+  },
+  "stateChanges": {
+    "California": [
+      { "year": 1960, "foreignBornPct": 8.2 },
+      { "year": 1970, "foreignBornPct": 8.5 },
+      { "year": 1980, "foreignBornPct": 15.1 },
+      { "year": 1990, "foreignBornPct": 21.7 },
+      { "year": 2000, "foreignBornPct": 26.2 },
+      { "year": 2010, "foreignBornPct": 27.2 },
+      { "year": 2020, "foreignBornPct": 26.7 }
+    ]
+  }
+}

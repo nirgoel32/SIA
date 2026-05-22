@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fig-washington",
+    "firstName": "George",
+    "lastName": "Washington",
+    "wikiTreeId": "Washington-1",
+    "birthYear": 1732,
+    "description": "First U.S. President; family roots trace to English gentry who settled in colonial Virginia.",
+    "originCountry": "England",
+    "settlement": "Virginia"
+  },
+  {
+    "id": "fig-tubman",
+    "firstName": "Harriet",
+    "lastName": "Tubman",
+    "wikiTreeId": "Tubman-1",
+    "birthYear": 1822,
+    "description": "Abolitionist and conductor on the Underground Railroad; born into enslaved family in Maryland.",
+    "originCountry": "United States",
+    "settlement": "Maryland"
+  },
+  {
+    "id": "fig-carnegie",
+    "firstName": "Andrew",
+    "lastName": "Carnegie",
+    "wikiTreeId": "Carnegie-1",
+    "birthYear": 1835,
+    "description": "Industrialist and philanthropist; immigrated from Scotland as a child during the great wave of European migration.",
+    "originCountry": "Scotland",
+    "settlement": "Pennsylvania"
+  },
+  {
+    "id": "fig-yuri",
+    "firstName": "Yuri",
+    "lastName": "Kochiyama",
+    "wikiTreeId": "Kochiyama-1",
+    "birthYear": 1921,
+    "description": "Civil rights activist; Japanese American interned during WWII, later advocate for pan-ethnic solidarity.",
+    "originCountry": "Japan",
+    "settlement": "California"
+  }
+]

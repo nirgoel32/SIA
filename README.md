@@ -1,40 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Immigration Journey Installation
+
+An interactive public-history experience exploring how immigration shaped American families and demographics, especially after the 1965 Immigration and Nationality Act.
+
+## Features
+
+- Cinematic welcome screen and surname-based journey input
+- **FamilySearch** person search & ancestry (primary, when configured)
+- WikiTree genealogical search (fallback, with illustrative modeled stories)
+- Animated migration map with glowing arcs
+- Immigration timeline (laws, family milestones, historical events)
+- Force-directed family tree visualization
+- Census demographic charts (API + curated fallbacks)
+- Counterfactual “America without the 1965 Act” educational simulation
+- Historical figures explorer
+
+## Tech Stack
+
+- **Frontend:** Next.js 14, React, Tailwind CSS, Framer Motion, D3.js, react-force-graph-2d
+- **Backend:** Next.js API routes (WikiTree proxy, Census, Ellis Island curated data)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### FamilySearch setup (recommended)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Create a free app at [FamilySearch Developers](https://www.familysearch.org/developers/)
+2. Copy your **App Key** (client ID)
+3. Create `.env.local`:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+FAMILYSEARCH_CLIENT_ID=your-app-key-here
+WIKITREE_APP_ID=ImmigrationJourneyDemo
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The app uses FamilySearch’s **unauthenticated session** for public tree search and ancestry (no user login required). Search is tried first; WikiTree and modeled fallbacks run if FamilySearch is unavailable or returns no matches.
 
-## Learn More
+### Example journey
 
-To learn more about Next.js, take a look at the following resources:
+1. Click **Start Journey**
+2. Enter surname `Patel`, country `India`, decade `1970s`
+3. View migration map, timeline, family tree, and demographics
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data & Ethics
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The installation clearly distinguishes:
 
-## Deploy on Vercel
+- **Historical records** (curated Ellis Island data, WikiTree public API)
+- **Inferred connections** (migration paths when no record match)
+- **Simulations** (counterfactual demographic modeling)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+It does not claim uncertain ancestry as fact or expose private living-person data.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Project Structure
+
+```
+src/
+  components/   # UI visualizations
+  pages/        # Routes + API handlers
+  services/     # Census, FamilySearch, WikiTree, Ellis Island logic
+  data/         # Curated JSON datasets
+  lib/          # Journey builder utilities
+```
+
+## Scripts
+
+| Command       | Description          |
+|---------------|----------------------|
+| `npm run dev` | Development server   |
+| `npm run build` | Production build   |
+| `npm start`   | Run production build |

@@ -1,0 +1,32 @@
+[
+  {
+    "year": 1882,
+    "title": "Chinese Exclusion Act",
+    "description": "First major law restricting immigration based on nationality, banning Chinese laborers."
+  },
+  {
+    "year": 1924,
+    "title": "National Origins Act",
+    "description": "Established strict national-origin quotas that heavily favored Northern and Western Europe."
+  },
+  {
+    "year": 1952,
+    "title": "Immigration and Nationality Act of 1952",
+    "description": "Maintained quota system but eliminated race-based barriers to naturalization."
+  },
+  {
+    "year": 1965,
+    "title": "Immigration and Nationality Act of 1965",
+    "description": "Ended national-origin quotas, opening pathways for family reunification and skilled workers from Asia, Africa, and Latin America."
+  },
+  {
+    "year": 1986,
+    "title": "Immigration Reform and Control Act",
+    "description": "Granted amnesty to millions while strengthening border enforcement."
+  },
+  {
+    "year": 1990,
+    "title": "Immigration Act of 1990",
+    "description": "Raised overall immigration caps and created diversity visa program."
+  }
+]

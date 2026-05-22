@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ei-001",
+    "surname": "Patel",
+    "firstName": "Raj",
+    "ship": "SS United States",
+    "arrivalYear": 1972,
+    "originCountry": "India",
+    "portOfEntry": "New York"
+  },
+  {
+    "id": "ei-002",
+    "surname": "Patel",
+    "firstName": "Lakshmi",
+    "ship": "SS United States",
+    "arrivalYear": 1972,
+    "originCountry": "India",
+    "portOfEntry": "New York"
+  },
+  {
+    "id": "ei-003",
+    "surname": "O'Brien",
+    "firstName": "Michael",
+    "ship": "RMS Lusitania",
+    "arrivalYear": 1908,
+    "originCountry": "Ireland",
+    "portOfEntry": "Ellis Island"
+  },
+  {
+    "id": "ei-004",
+    "surname": "Rossi",
+    "firstName": "Giuseppe",
+    "ship": "SS Napoli",
+    "arrivalYear": 1912,
+    "originCountry": "Italy",
+    "portOfEntry": "Ellis Island"
+  },
+  {
+    "id": "ei-005",
+    "surname": "Chen",
+    "firstName": "Wei",
+    "ship": "SS President Wilson",
+    "arrivalYear": 1968,
+    "originCountry": "China",
+    "portOfEntry": "San Francisco"
+  },
+  {
+    "id": "ei-006",
+    "surname": "Washington",
+    "firstName": "George",
+    "ship": "N/A",
+    "arrivalYear": 1657,
+    "originCountry": "England",
+    "portOfEntry": "Virginia Colony"
+  },
+  {
+    "id": "ei-007",
+    "surname": "Garcia",
+    "firstName": "Maria",
+    "ship": "SS Cristobal",
+    "arrivalYear": 1967,
+    "originCountry": "Mexico",
+    "portOfEntry": "El Paso"
+  },
+  {
+    "id": "ei-008",
+    "surname": "Kim",
+    "firstName": "Sun-Hee",
+    "ship": "SS Hope",
+    "arrivalYear": 1975,
+    "originCountry": "South Korea",
+    "portOfEntry": "Los Angeles"
+  }
+]

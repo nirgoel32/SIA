@@ -2,26 +2,330 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ---------------------------------------------------------------------------
+   Editorial palette — Smithsonian / Library-of-Congress feel.
+   RGB channels so Tailwind <alpha-value> syntax works.
+   --------------------------------------------------------------------------- */
+
+:root,
+[data-theme="dark"] {
+  /* Surfaces — deep midnight ink, never pitch black */
+  --museum-bg: 14 21 33;            /* #0E1521 */
+  --museum-bg-soft: 19 28 42;       /* card panels */
+  --museum-surface: 234 226 209;    /* parchment, used at low opacity */
+  --museum-border: 234 226 209;     /* parchment rule */
+  --museum-on-bg: 14 21 33;
+
+  /* Text */
+  --museum-text: 234 226 209;       /* parchment */
+  --museum-muted: 156 156 145;      /* aged-paper grey */
+  --museum-faint: 99 105 117;       /* archival caption grey */
+
+  /* Single editorial accent — gold ochre, used very sparingly */
+  --museum-gold: 201 162 74;        /* #C9A24A */
+  --museum-gold-soft: 168 134 60;
+  --museum-brick: 181 97 62;        /* terracotta secondary */
+  --museum-glow: 201 162 74;        /* aliases preserved for legacy refs */
+  --museum-violet: 181 97 62;
+  --museum-amber: 201 162 74;
+  --museum-emerald: 156 156 145;
+  --museum-rose: 181 97 62;
+
+  /* Map */
+  --map-ocean-from: 19 28 42;
+  --map-ocean-to: 10 16 26;
+  --map-land: 28 40 58;
+  --map-graticule: 156 156 145;
+  --map-border: 201 162 74;
+
+  /* Shadows — paper depth, not glow */
+  --shadow-card: 0 24px 60px -28px rgba(0, 0, 0, 0.65);
+  --shadow-button: 0 1px 0 rgb(0 0 0 / 0.35);
+
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme="light"] {
+  /* Warm museum-print palette */
+  --museum-bg: 247 242 232;         /* ivory paper */
+  --museum-bg-soft: 240 233 219;
+  --museum-surface: 26 28 32;       /* ink, used at low opacity */
+  --museum-border: 26 28 32;
+  --museum-on-bg: 247 242 232;
+
+  /* Text */
+  --museum-text: 26 28 32;          /* deep ink */
+  --museum-muted: 96 92 82;         /* archival grey-brown */
+  --museum-faint: 142 134 119;
+
+  /* Editorial accent — deeper ochre for contrast on ivory */
+  --museum-gold: 153 113 32;        /* #997120 */
+  --museum-gold-soft: 178 138 56;
+  --museum-brick: 144 70 39;
+  --museum-glow: 153 113 32;
+  --museum-violet: 144 70 39;
+  --museum-amber: 153 113 32;
+  --museum-emerald: 96 92 82;
+  --museum-rose: 144 70 39;
+
+  /* Map */
+  --map-ocean-from: 230 222 205;
+  --map-ocean-to: 214 204 184;
+  --map-land: 244 237 220;
+  --map-graticule: 96 92 82;
+  --map-border: 153 113 32;
+
+  --shadow-card: 0 18px 44px -28px rgba(50, 30, 10, 0.22);
+  --shadow-button: 0 1px 0 rgb(0 0 0 / 0.12);
+
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--museum-text));
+  background: rgb(var(--museum-bg));
+  font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  font-feature-settings: "onum", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Subtle paper grain on dark theme only — invisible but adds depth */
+[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(
+    rgba(234, 226, 209, 0.018) 1px,
+    transparent 1px
+  );
+  background-size: 3px 3px;
+}
+
+::selection {
+  background: rgb(var(--museum-gold) / 0.3);
+  color: rgb(var(--museum-text));
+}
+
+@layer components {
+  .font-display {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.012em;
   }
+
+  .font-serif {
+    font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-feature-settings: "tnum", "zero";
+  }
+
+  /* Editorial small-caps eyebrow used throughout */
+  .eyebrow {
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: rgb(var(--museum-muted));
+  }
+
+  .eyebrow-gold {
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: rgb(var(--museum-gold));
+  }
+
+  /* Folio numbering — used on section headers */
+  .folio {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: rgb(var(--museum-gold));
+  }
+
+  /* Thin gold rule — the signature editorial divider */
+  .rule-gold {
+    border: 0;
+    height: 1px;
+    background: rgb(var(--museum-gold) / 0.4);
+  }
+  .rule-ink {
+    border: 0;
+    height: 1px;
+    background: rgb(var(--museum-border) / 0.18);
+  }
+
+  /* Subtle hint color preserved for legacy markup; not used much anymore */
+  .text-glow {
+    color: rgb(var(--museum-gold));
+  }
+
+  /* Institutional primary button — sharp corners, ink-on-paper feel */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium tracking-wide transition focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    font-family: "Inter", system-ui, sans-serif;
+    background: rgb(var(--museum-text));
+    color: rgb(var(--museum-bg));
+    border-radius: 2px;
+    box-shadow: var(--shadow-button);
+    --tw-ring-color: rgb(var(--museum-gold) / 0.6);
+    --tw-ring-offset-color: rgb(var(--museum-bg));
+  }
+  .btn-primary:hover {
+    background: rgb(var(--museum-gold));
+    color: rgb(var(--museum-bg));
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium tracking-wide transition focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    font-family: "Inter", system-ui, sans-serif;
+    background: transparent;
+    color: rgb(var(--museum-text));
+    border: 1px solid rgb(var(--museum-border) / 0.4);
+    border-radius: 2px;
+    --tw-ring-color: rgb(var(--museum-gold) / 0.6);
+    --tw-ring-offset-color: rgb(var(--museum-bg));
+  }
+  .btn-secondary:hover {
+    border-color: rgb(var(--museum-gold));
+    color: rgb(var(--museum-gold));
+  }
+
+  /* Editorial form field — bottom rule, not box */
+  .field-rule {
+    @apply w-full bg-transparent px-0 py-2 text-base transition focus:outline-none;
+    color: rgb(var(--museum-text));
+    border: 0;
+    border-bottom: 1px solid rgb(var(--museum-border) / 0.25);
+    border-radius: 0;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+  .field-rule::placeholder {
+    color: rgb(var(--museum-faint));
+    font-style: italic;
+  }
+  .field-rule:focus {
+    border-bottom-color: rgb(var(--museum-gold));
+  }
+  .field-rule:disabled {
+    opacity: 0.5;
+  }
+
+  /* Legacy input box retained for select elements */
+  .input-field {
+    @apply w-full px-4 py-2.5 text-sm transition focus:outline-none focus:ring-1;
+    background: rgb(var(--museum-surface) / 0.04);
+    color: rgb(var(--museum-text));
+    border: 1px solid rgb(var(--museum-border) / 0.2);
+    border-radius: 2px;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  .input-field::placeholder {
+    color: rgb(var(--museum-faint));
+  }
+  .input-field:focus {
+    border-color: rgb(var(--museum-gold) / 0.7);
+    --tw-ring-color: rgb(var(--museum-gold) / 0.3);
+  }
+
+  .stat-card {
+    @apply p-5;
+    background: rgb(var(--museum-surface) / 0.03);
+    border: 1px solid rgb(var(--museum-border) / 0.12);
+    border-radius: 2px;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl;
+    color: rgb(var(--museum-text));
+    font-weight: 500;
+  }
+
+  .nav-link {
+    @apply px-3 py-1.5 transition;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: rgb(var(--museum-muted));
+    border-radius: 2px;
+  }
+  .nav-link:hover {
+    color: rgb(var(--museum-text));
+    background: rgb(var(--museum-surface) / 0.05);
+  }
+  .nav-link[aria-current="page"] {
+    color: rgb(var(--museum-text));
+  }
+
+  .surface {
+    @apply backdrop-blur;
+    background: rgb(var(--museum-surface) / 0.03);
+    border: 1px solid rgb(var(--museum-border) / 0.12);
+    border-radius: 2px;
+  }
+
+  /* Drop cap for opening paragraphs */
+  .drop-cap::first-letter {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.85;
+    padding: 0.06em 0.1em 0 0;
+    color: rgb(var(--museum-gold));
+  }
+}
+
+/* Leaflet overrides */
+.leaflet-container {
+  background: rgb(var(--map-ocean-to));
+  font-family: "Inter", system-ui, sans-serif;
+}
+.leaflet-control-attribution {
+  background: rgb(var(--museum-bg) / 0.82) !important;
+  color: rgb(var(--museum-muted)) !important;
+  font-size: 9px !important;
+  padding: 1px 6px !important;
+  border-radius: 0;
+}
+.leaflet-control-attribution a {
+  color: rgb(var(--museum-gold)) !important;
+}
+.inset-tooltip {
+  background: rgb(var(--museum-bg) / 0.94) !important;
+  border: 1px solid rgb(var(--museum-gold) / 0.4) !important;
+  color: rgb(var(--museum-text)) !important;
+  font-family: "Inter", system-ui, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 3px 7px !important;
+  border-radius: 0 !important;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.5) !important;
+}
+.inset-tooltip::before {
+  display: none !important;
 }
