@@ -9,6 +9,8 @@ import DemographicChart from "@/components/DemographicChart";
 import CounterfactualSim from "@/components/CounterfactualSim";
 import Act1965Impact from "@/components/Act1965Impact";
 import DisclaimerBanner from "@/components/DisclaimerBanner";
+import NoMatchCallout from "@/components/NoMatchCallout";
+import PassengerManifest from "@/components/PassengerManifest";
 import PersonMatchPicker from "@/components/PersonMatchPicker";
 import SectionHeader from "@/components/SectionHeader";
 import SourceChip from "@/components/SourceChip";
@@ -471,6 +473,24 @@ export default function JourneyPage() {
           />
         )}
 
+        {/* "No public record matched" callout — the most common UX confusion is
+            users assuming the app is broken when it doesn't find their family.
+            Public archives only cover famous people; ordinary families aren't
+            there and that's expected. We show this whenever the search fell
+            through to the modeled path AND the user isn't already on their own
+            uploaded tree. */}
+        {!needsSelection &&
+          (genealogySource === "enriched" || !genealogySource) &&
+          input && (
+            <NoMatchCallout
+              searchedName={
+                input.firstName
+                  ? `${input.firstName} ${input.surname}`.trim()
+                  : `the ${input.surname} family`
+              }
+            />
+          )}
+
         <section className="space-y-6">
           {(() => {
             const routes = migrations.filter(
@@ -505,6 +525,29 @@ export default function JourneyPage() {
           })()}
           <MigrationMap migrations={migrations} extraCoords={extraCoords} />
         </section>
+
+        {/* Ellis Island manifest reconstruction — only meaningful for people
+            whose family era overlaps the Ellis Island window (1892–1957) and
+            who came from an European origin Ellis Island actually processed. */}
+        {!needsSelection &&
+          input?.decade &&
+          /^(18[89]|19[0-4])/.test(input.decade) &&
+          resolvedCountry &&
+          resolvedCountry !== "United States" && (
+            <section className="space-y-6">
+              <SectionHeader
+                eyebrow="01b · Archive"
+                title="Possible passenger record"
+                description="What a real Ellis Island manifest entry from this person's era and origin would look like. Reconstructed from real ship rosters that sailed this route — with a direct link to search the actual archive."
+              />
+              <PassengerManifest
+                lastName={input.surname}
+                firstName={input.firstName}
+                country={resolvedCountry}
+                decade={input.decade}
+              />
+            </section>
+          )}
 
         {!needsSelection && (
           <>

@@ -11,6 +11,12 @@ import {
   type LatLng,
 } from "@/lib/mapGeo";
 import { useTheme } from "@/lib/theme";
+import {
+  entityAt,
+  loadForYear,
+  snapToEpoch,
+  type HistoricalCollection,
+} from "@/lib/historicalBorders";
 import type { MigrationEvent } from "@/types";
 
 // Leaflet pulls in `window`/`document` at import time, so this must be
@@ -129,6 +135,23 @@ export default function MigrationMap({ migrations, extraCoords }: Props) {
 
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [timeTravel, setTimeTravel] = useState(false);
+  // Currently displayed historical epoch (null = modern borders shown).
+  const [activeEpoch, setActiveEpoch] = useState<number | null>(null);
+  // The political entity that contains the active chapter's place, at that
+  // chapter's epoch — surfaced as a small editorial label on the map.
+  const [historicalContext, setHistoricalContext] = useState<{
+    place: string;
+    epoch: number;
+    entity: string;
+  } | null>(null);
+  // Cached modern country features (from world-atlas) — used to restore the
+  // modern view when the user toggles time-travel back off.
+  const modernCountriesRef = useRef<FeatureCollection | null>(null);
+  const historicalDataRef = useRef<HistoricalCollection | null>(null);
+  // Theme-aware land colors captured at last render — read by the historical
+  // borders swap effect so its restyle matches the rest of the map.
+  const landColorsRef = useRef<{ fill: string; stroke: string } | null>(null);
   const { resolved: theme } = useTheme();
 
   const resolver = useMemo(() => makeResolver(extraCoords), [extraCoords]);
@@ -309,6 +332,10 @@ export default function MigrationMap({ migrations, extraCoords }: Props) {
         .attr("fill", LAND_FILL)
         .attr("stroke", LAND_STROKE)
         .attr("stroke-width", 0.4);
+
+      // Stash for time-travel swap effect.
+      modernCountriesRef.current = countries;
+      landColorsRef.current = { fill: LAND_FILL, stroke: LAND_STROKE };
 
       const layer = world.append("g").attr("class", "events");
 
@@ -502,6 +529,114 @@ export default function MigrationMap({ migrations, extraCoords }: Props) {
       cancelAnimationFrame(animFrame);
     };
   }, [migrations, resolver, theme]);
+
+  /* -------------------------------------------------------------------- */
+  /* Time-travel cartography                                               */
+  /*                                                                       */
+  /* When `timeTravel` is on, we snap to the closest epoch for the active  */
+  /* chapter year and redraw the .land layer with historical borders.      */
+  /* When off, we restore the modern borders cached during the main        */
+  /* render. Only the land paths change — events/particles are untouched.  */
+  /* -------------------------------------------------------------------- */
+
+  // Pick an epoch from the active chapter year (or default to 1914 when no
+  // chapter is selected — that's the most evocative pre-WWI map for most
+  // immigration stories).
+  useEffect(() => {
+    if (!timeTravel) {
+      setActiveEpoch(null);
+      setHistoricalContext(null);
+      return;
+    }
+    let year: number;
+    if (activeStep !== null) {
+      const s = steps.find((st) => st.index === activeStep);
+      year = s?.migration.year || 1914;
+    } else {
+      year = 1914;
+    }
+    setActiveEpoch(snapToEpoch(year));
+  }, [timeTravel, activeStep, steps]);
+
+  // Redraw the .land layer when activeEpoch changes.
+  useEffect(() => {
+    const world = worldGroupRef.current;
+    const projection = projectionRef.current;
+    if (!world || !projection) return;
+
+    const colors = landColorsRef.current ?? {
+      fill: "rgb(28, 40, 58)",
+      stroke: "rgba(255, 255, 255, 0.1)",
+    };
+    const pathFn = d3.geoPath().projection(projection);
+    const land = d3.select(world).select<SVGGElement>("g.land");
+    if (land.empty()) return;
+
+    async function swap() {
+      if (activeEpoch === null) {
+        // Restore modern borders.
+        const modern = modernCountriesRef.current;
+        if (!modern) return;
+        historicalDataRef.current = null;
+        land
+          .selectAll<SVGPathElement, unknown>("path")
+          .data(modern.features)
+          .join("path")
+          .attr("d", pathFn)
+          .attr("fill", colors.fill)
+          .attr("stroke", colors.stroke)
+          .attr("stroke-width", 0.4);
+        return;
+      }
+      try {
+        const { data } = await loadForYear(activeEpoch);
+        historicalDataRef.current = data;
+        land
+          .selectAll<SVGPathElement, unknown>("path")
+          .data(data.features)
+          .join("path")
+          .attr("d", pathFn)
+          .attr("fill", colors.fill)
+          .attr("stroke", colors.stroke)
+          .attr("stroke-width", 0.5)
+          .attr("stroke-opacity", 0.55);
+      } catch (e) {
+        console.warn("[historical-borders] failed to load epoch", activeEpoch, e);
+      }
+    }
+    swap();
+  }, [activeEpoch]);
+
+  // Compute the historical context for the active chapter (e.g. "Russian
+  // Empire" for 1867 Warsaw) so we can surface it in the guide panel.
+  useEffect(() => {
+    if (!timeTravel || activeStep === null) {
+      setHistoricalContext(null);
+      return;
+    }
+    const data = historicalDataRef.current;
+    if (!data) return;
+    const s = steps.find((st) => st.index === activeStep);
+    if (!s) return;
+    const here = entityAt(data, s.from.lat, s.from.lng);
+    if (!here) {
+      setHistoricalContext(null);
+      return;
+    }
+    // SUBJECTO captures the higher political authority (Russian Empire,
+    // Austria-Hungary). NAME is the local administrative unit. We show
+    // SUBJECTO when it differs from NAME because that's the punchline:
+    // "Warsaw was not in Poland in 1867 — it was in the Russian Empire."
+    const entity =
+      here.subjectTo && here.subjectTo !== here.name
+        ? `${here.name ?? ""} · ${here.subjectTo}`
+        : here.name ?? here.subjectTo ?? "—";
+    setHistoricalContext({
+      place: shortPlaceLabel(s.migration.from),
+      epoch: activeEpoch ?? 0,
+      entity,
+    });
+  }, [timeTravel, activeStep, steps, activeEpoch]);
 
   // Pan + zoom + highlight on active step change.
   useEffect(() => {
@@ -703,6 +838,49 @@ export default function MigrationMap({ migrations, extraCoords }: Props) {
             Place of life
           </span>
         </div>
+
+        {/* Time-travel toggle */}
+        {hasAnything && (
+          <button
+            type="button"
+            onClick={() => setTimeTravel((v) => !v)}
+            className={`absolute left-4 top-4 z-20 flex items-center gap-2 border px-3 py-2 text-[10px] uppercase tracking-[0.22em] backdrop-blur transition focus:outline-none focus:ring-1 focus:ring-gold/40 ${
+              timeTravel
+                ? "border-gold bg-gold/[0.12] text-gold"
+                : "border-museum-border/20 bg-museum-bg/70 text-museum-muted hover:border-gold/50 hover:text-gold"
+            }`}
+            title="Show political borders as they existed in the chapter's year"
+            aria-pressed={timeTravel}
+          >
+            <span aria-hidden>{timeTravel ? "◉" : "○"}</span>
+            <span>Time travel · borders</span>
+            {timeTravel && activeEpoch !== null && (
+              <span className="font-mono normal-case tracking-normal text-museum-text">
+                {activeEpoch}
+              </span>
+            )}
+          </button>
+        )}
+
+        {/* Historical context label — appears only in time-travel mode when
+            the active chapter's place falls inside a historical polity that
+            differs from the modern name. */}
+        {timeTravel && historicalContext && (
+          <motion.div
+            key={historicalContext.entity + historicalContext.epoch}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute left-1/2 top-4 z-10 -translate-x-1/2 border border-gold/40 bg-museum-bg/85 px-4 py-2 text-center backdrop-blur"
+          >
+            <p className="folio">
+              In {historicalContext.epoch} · {historicalContext.place}
+            </p>
+            <p className="mt-1 font-display text-sm text-museum-text">
+              was in the {historicalContext.entity}
+            </p>
+          </motion.div>
+        )}
 
         {/* Pan / zoom controls */}
         <div className="absolute right-4 bottom-4 z-20 flex flex-col items-stretch border border-museum-border/15 bg-museum-bg/85 backdrop-blur">

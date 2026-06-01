@@ -29,7 +29,7 @@ function applyTheme(theme: ResolvedTheme) {
 }
 
 /** Inline script string for _document — applied before React paints to
- *  prevent flash of incorrect theme. */
+ *  prevent flash of incorrect tWheme. */
 export const NO_FLASH_SCRIPT = `
 (function () {
   try {

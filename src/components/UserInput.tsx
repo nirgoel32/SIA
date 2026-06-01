@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import type { JourneyInput } from "@/types";
 
 type Props = {
@@ -140,6 +141,30 @@ export default function UserInput({ onSubmit, loading }: Props) {
           </button>
         </div>
       </form>
+
+      {/* Set expectations honestly — most ordinary families aren't in public
+          archives, and users routinely mistake the modeled fallback for a bug.
+          Tell them up front, with the two genuine paths to their real story. */}
+      <aside className="mt-14 border-l-2 border-gold/60 bg-museum-surface/[0.02] py-4 pl-6 pr-4">
+        <p className="eyebrow-gold">A note on coverage</p>
+        <p className="mt-2 font-serif text-sm leading-relaxed text-museum-muted">
+          Public archives — Wikipedia, WikiTree, Wikidata, FamilySearch — cover
+          mostly notable historical figures.{" "}
+          <span className="text-museum-text">
+            Most ordinary families aren&rsquo;t indexed in any of them.
+          </span>{" "}
+          If a name search doesn&rsquo;t return your family, that&rsquo;s
+          expected — not a bug. For your <em>actual</em> family story, use{" "}
+          <Link
+            href="/my-family"
+            className="border-b border-gold/60 pb-0.5 font-medium text-gold transition hover:text-museum-text"
+          >
+            Your Family
+          </Link>{" "}
+          to upload a GEDCOM export or enter three generations manually. Your
+          tree stays on your device.
+        </p>
+      </aside>
     </motion.section>
   );
 }

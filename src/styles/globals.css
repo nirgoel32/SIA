@@ -111,6 +111,14 @@ body {
   background-size: 3px 3px;
 }
 
+/* Browser Fullscreen API defaults the element's background-color to black
+   via the UA stylesheet. Our map container sets bg-museum-bg in fullscreen,
+   but we belt-and-brace it here so the parchment palette wins regardless. */
+:fullscreen,
+:-webkit-full-screen {
+  background-color: rgb(var(--museum-bg));
+}
+
 ::selection {
   background: rgb(var(--museum-gold) / 0.3);
   color: rgb(var(--museum-text));

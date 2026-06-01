@@ -1,0 +1,272 @@
+[
+  {
+    "name": "SS Bremen",
+    "line": "Norddeutscher Lloyd",
+    "departurePort": "Bremen, Germany",
+    "yearStart": 1897,
+    "yearEnd": 1915,
+    "primaryOrigins": ["Germany", "Poland", "Russia", "Austria-Hungary", "Lithuania"],
+    "averagePassengers": 1450
+  },
+  {
+    "name": "SS Kaiser Wilhelm der Grosse",
+    "line": "Norddeutscher Lloyd",
+    "departurePort": "Bremen, Germany",
+    "yearStart": 1897,
+    "yearEnd": 1914,
+    "primaryOrigins": ["Germany", "Poland", "Russia", "Austria-Hungary"],
+    "averagePassengers": 1500
+  },
+  {
+    "name": "SS Kronprinz Wilhelm",
+    "line": "Norddeutscher Lloyd",
+    "departurePort": "Bremen, Germany",
+    "yearStart": 1901,
+    "yearEnd": 1914,
+    "primaryOrigins": ["Germany", "Poland", "Russia", "Austria-Hungary"],
+    "averagePassengers": 1400
+  },
+  {
+    "name": "SS Lusitania",
+    "line": "Cunard Line",
+    "departurePort": "Liverpool, England",
+    "yearStart": 1907,
+    "yearEnd": 1915,
+    "primaryOrigins": ["Ireland", "England", "Scotland", "Wales"],
+    "averagePassengers": 2150
+  },
+  {
+    "name": "SS Mauretania",
+    "line": "Cunard Line",
+    "departurePort": "Liverpool, England",
+    "yearStart": 1907,
+    "yearEnd": 1934,
+    "primaryOrigins": ["Ireland", "England", "Scotland"],
+    "averagePassengers": 2100
+  },
+  {
+    "name": "SS Saxonia",
+    "line": "Cunard Line",
+    "departurePort": "Liverpool, England",
+    "yearStart": 1900,
+    "yearEnd": 1925,
+    "primaryOrigins": ["Ireland", "England"],
+    "averagePassengers": 1350
+  },
+  {
+    "name": "SS Carpathia",
+    "line": "Cunard Line",
+    "departurePort": "Trieste, Austria-Hungary",
+    "yearStart": 1903,
+    "yearEnd": 1918,
+    "primaryOrigins": ["Italy", "Austria-Hungary", "Croatia", "Slovenia", "Hungary"],
+    "averagePassengers": 1700
+  },
+  {
+    "name": "SS Olympic",
+    "line": "White Star Line",
+    "departurePort": "Southampton, England",
+    "yearStart": 1911,
+    "yearEnd": 1934,
+    "primaryOrigins": ["England", "Ireland", "Scotland"],
+    "averagePassengers": 2400
+  },
+  {
+    "name": "SS Majestic",
+    "line": "White Star Line",
+    "departurePort": "Southampton, England",
+    "yearStart": 1890,
+    "yearEnd": 1914,
+    "primaryOrigins": ["England", "Ireland"],
+    "averagePassengers": 1300
+  },
+  {
+    "name": "SS Republic",
+    "line": "White Star Line",
+    "departurePort": "Queenstown, Ireland",
+    "yearStart": 1903,
+    "yearEnd": 1909,
+    "primaryOrigins": ["Ireland", "England"],
+    "averagePassengers": 1200
+  },
+  {
+    "name": "SS Adriatic",
+    "line": "White Star Line",
+    "departurePort": "Queenstown, Ireland",
+    "yearStart": 1907,
+    "yearEnd": 1934,
+    "primaryOrigins": ["Ireland", "England"],
+    "averagePassengers": 1600
+  },
+  {
+    "name": "SS Princess Irene",
+    "line": "Norddeutscher Lloyd",
+    "departurePort": "Naples, Italy",
+    "yearStart": 1900,
+    "yearEnd": 1914,
+    "primaryOrigins": ["Italy", "Greece", "Russia", "Turkey"],
+    "averagePassengers": 1900
+  },
+  {
+    "name": "SS Re d'Italia",
+    "line": "Lloyd Italiano",
+    "departurePort": "Naples, Italy",
+    "yearStart": 1907,
+    "yearEnd": 1915,
+    "primaryOrigins": ["Italy", "Greece"],
+    "averagePassengers": 1600
+  },
+  {
+    "name": "SS Duca degli Abruzzi",
+    "line": "Navigazione Generale Italiana",
+    "departurePort": "Genoa, Italy",
+    "yearStart": 1907,
+    "yearEnd": 1928,
+    "primaryOrigins": ["Italy"],
+    "averagePassengers": 1750
+  },
+  {
+    "name": "SS Roma",
+    "line": "Navigazione Generale Italiana",
+    "departurePort": "Naples, Italy",
+    "yearStart": 1902,
+    "yearEnd": 1924,
+    "primaryOrigins": ["Italy", "Sicily"],
+    "averagePassengers": 1650
+  },
+  {
+    "name": "SS Patria",
+    "line": "Hamburg-American Line",
+    "departurePort": "Hamburg, Germany",
+    "yearStart": 1894,
+    "yearEnd": 1914,
+    "primaryOrigins": ["Germany", "Russia", "Poland", "Lithuania"],
+    "averagePassengers": 1450
+  },
+  {
+    "name": "SS Pennsylvania",
+    "line": "Hamburg-American Line",
+    "departurePort": "Hamburg, Germany",
+    "yearStart": 1896,
+    "yearEnd": 1918,
+    "primaryOrigins": ["Germany", "Russia", "Poland"],
+    "averagePassengers": 2300
+  },
+  {
+    "name": "SS Pretoria",
+    "line": "Hamburg-American Line",
+    "departurePort": "Hamburg, Germany",
+    "yearStart": 1898,
+    "yearEnd": 1920,
+    "primaryOrigins": ["Germany", "Russia", "Poland", "Romania"],
+    "averagePassengers": 2400
+  },
+  {
+    "name": "SS Amerika",
+    "line": "Hamburg-American Line",
+    "departurePort": "Hamburg, Germany",
+    "yearStart": 1905,
+    "yearEnd": 1917,
+    "primaryOrigins": ["Germany", "Russia", "Poland"],
+    "averagePassengers": 2150
+  },
+  {
+    "name": "SS President Lincoln",
+    "line": "Hamburg-American Line",
+    "departurePort": "Hamburg, Germany",
+    "yearStart": 1907,
+    "yearEnd": 1918,
+    "primaryOrigins": ["Germany", "Russia", "Poland"],
+    "averagePassengers": 1950
+  },
+  {
+    "name": "SS La Lorraine",
+    "line": "Compagnie Générale Transatlantique",
+    "departurePort": "Le Havre, France",
+    "yearStart": 1900,
+    "yearEnd": 1920,
+    "primaryOrigins": ["France", "Belgium", "Switzerland", "Italy"],
+    "averagePassengers": 1400
+  },
+  {
+    "name": "SS France",
+    "line": "Compagnie Générale Transatlantique",
+    "departurePort": "Le Havre, France",
+    "yearStart": 1912,
+    "yearEnd": 1934,
+    "primaryOrigins": ["France", "Belgium", "Switzerland"],
+    "averagePassengers": 1800
+  },
+  {
+    "name": "SS Rotterdam",
+    "line": "Holland America Line",
+    "departurePort": "Rotterdam, Netherlands",
+    "yearStart": 1908,
+    "yearEnd": 1916,
+    "primaryOrigins": ["Netherlands", "Germany", "Russia", "Poland"],
+    "averagePassengers": 1850
+  },
+  {
+    "name": "SS Nieuw Amsterdam",
+    "line": "Holland America Line",
+    "departurePort": "Rotterdam, Netherlands",
+    "yearStart": 1906,
+    "yearEnd": 1932,
+    "primaryOrigins": ["Netherlands", "Russia", "Poland"],
+    "averagePassengers": 1700
+  },
+  {
+    "name": "SS Stockholm",
+    "line": "Swedish American Line",
+    "departurePort": "Gothenburg, Sweden",
+    "yearStart": 1900,
+    "yearEnd": 1928,
+    "primaryOrigins": ["Sweden", "Norway", "Denmark", "Finland"],
+    "averagePassengers": 1200
+  },
+  {
+    "name": "SS Oscar II",
+    "line": "Scandinavian American Line",
+    "departurePort": "Copenhagen, Denmark",
+    "yearStart": 1902,
+    "yearEnd": 1928,
+    "primaryOrigins": ["Denmark", "Sweden", "Norway"],
+    "averagePassengers": 950
+  },
+  {
+    "name": "SS Hellig Olav",
+    "line": "Scandinavian American Line",
+    "departurePort": "Copenhagen, Denmark",
+    "yearStart": 1903,
+    "yearEnd": 1928,
+    "primaryOrigins": ["Denmark", "Sweden", "Norway"],
+    "averagePassengers": 900
+  },
+  {
+    "name": "SS Czar",
+    "line": "Russian American Line",
+    "departurePort": "Libau, Russian Empire",
+    "yearStart": 1912,
+    "yearEnd": 1918,
+    "primaryOrigins": ["Russia", "Lithuania", "Latvia", "Poland"],
+    "averagePassengers": 1450
+  },
+  {
+    "name": "SS Athinai",
+    "line": "Greek Line",
+    "departurePort": "Piraeus, Greece",
+    "yearStart": 1908,
+    "yearEnd": 1915,
+    "primaryOrigins": ["Greece", "Turkey", "Cyprus"],
+    "averagePassengers": 750
+  },
+  {
+    "name": "SS Themistocles",
+    "line": "Greek Line",
+    "departurePort": "Piraeus, Greece",
+    "yearStart": 1908,
+    "yearEnd": 1920,
+    "primaryOrigins": ["Greece"],
+    "averagePassengers": 800
+  }
+]
