@@ -3,8 +3,24 @@ import * as d3 from "d3";
 import type { FeatureCollection } from "geojson";
 import type { Topology } from "topojson-specification";
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 import { useTheme } from "@/lib/theme";
 import CompositionChart from "./CompositionChart";
+
+// 3D rotating globe view of the same data — loaded client-only because
+// d3 + topojson + world-atlas don't SSR cleanly. Mounted on demand when
+// the user toggles to "Globe" view so the heavy chunk doesn't ship until
+// they actually want it.
+const Post1965Globe = dynamic(() => import("./Post1965Globe"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full min-h-[500px] w-full items-center justify-center bg-museum-bg">
+      <p className="font-mono text-xs uppercase tracking-[0.25em] text-museum-muted">
+        Building the planet…
+      </p>
+    </div>
+  ),
+});
 import {
   COUNTRY_COORDS,
   GATEWAYS,
@@ -224,6 +240,7 @@ export default function Post1965Replay() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [compareMode, setCompareMode] = useState(false);
   const [splitterPct, setSplitterPct] = useState(50);
+  const [viewMode, setViewMode] = useState<"flat" | "globe">("flat");
   const { resolved: theme } = useTheme();
 
   // Sync `isFullscreen` state with the browser's actual fullscreen state.
@@ -1060,6 +1077,35 @@ export default function Post1965Replay() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {/* Flat / Globe segmented toggle. */}
+          <div className="mr-2 inline-flex overflow-hidden border border-museum-border/25">
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setViewMode("flat"); }}
+              className={`px-3 py-2 text-[10px] uppercase tracking-[0.22em] transition ${
+                viewMode === "flat"
+                  ? "bg-gold/[0.16] text-gold"
+                  : "bg-museum-bg/70 text-museum-muted hover:bg-museum-surface/[0.06] hover:text-gold"
+              }`}
+              aria-pressed={viewMode === "flat"}
+              title="Flat map view"
+            >
+              ▭ Flat
+            </button>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setViewMode("globe"); }}
+              className={`border-l border-museum-border/25 px-3 py-2 text-[10px] uppercase tracking-[0.22em] transition ${
+                viewMode === "globe"
+                  ? "bg-gold/[0.16] text-gold"
+                  : "bg-museum-bg/70 text-museum-muted hover:bg-museum-surface/[0.06] hover:text-gold"
+              }`}
+              aria-pressed={viewMode === "globe"}
+              title="3D globe view"
+            >
+              ◐ Globe
+            </button>
+          </div>
           <button
             type="button"
             onClick={goPrev}
@@ -1101,13 +1147,14 @@ export default function Post1965Replay() {
               e.stopPropagation();
               setCompareMode((v) => !v);
             }}
-            className={`ml-2 inline-flex items-center gap-2 border px-3 py-2 text-[10px] uppercase tracking-[0.22em] transition ${
+            disabled={viewMode === "globe"}
+            className={`ml-2 inline-flex items-center gap-2 border px-3 py-2 text-[10px] uppercase tracking-[0.22em] transition disabled:opacity-40 ${
               compareMode
                 ? "border-gold bg-gold/[0.16] text-gold"
                 : "border-museum-border/20 bg-museum-bg/70 text-museum-muted hover:border-gold/50 hover:text-gold"
             }`}
             aria-pressed={compareMode}
-            title="Compare what the map would look like if the 1965 Act hadn't passed"
+            title={viewMode === "globe" ? "Compare mode is only available on the flat map" : "Compare what the map would look like if the 1965 Act hadn't passed"}
           >
             <span aria-hidden>⇆</span>
             <span>{compareMode ? "Exit compare" : "Compare 1965"}</span>
@@ -1188,6 +1235,9 @@ export default function Post1965Replay() {
           }
         }}
       >
+        {/* ============== Flat-map subtree (SVG + flat-only overlays) ============== */}
+        {viewMode === "flat" && (
+        <>
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}
@@ -1289,6 +1339,13 @@ export default function Post1965Replay() {
             className="h-full bg-gradient-to-r from-gold via-gold to-brick"
           />
         </div>
+        </>
+        )}
+
+        {/* ============== Globe subtree ============== */}
+        {viewMode === "globe" && (
+          <Post1965Globe year={year} />
+        )}
 
         {/* Expand button — normal mode only. */}
         {!isFullscreen && (
@@ -1323,8 +1380,9 @@ export default function Post1965Replay() {
           </button>
         )}
 
-        {/* ----------------------------- Before/after splitter ----------------------------- */}
-        {compareMode && (
+        {/* Before/after splitter — flat map only. The counterfactual overlay
+            uses screen-space clip rects which don't translate to a 3D globe. */}
+        {compareMode && viewMode === "flat" && (
           <>
             {/* Side labels — top corners. */}
             <div
