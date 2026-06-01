@@ -345,7 +345,7 @@ type SlideCtx = {
 function renderSlide(idx: number, ctx: SlideCtx) {
   switch (idx) {
     case 0: return <WelcomeSlide next={ctx.next} />;
-    case 1: return <SixLivesSlide onClose={ctx.onClose} />;
+    case 1: return <SixLivesSlide />;
     case 2: return <HartCellerSlide />;
     case 3: return <MapSlide />;
     case 4: return <GlobeSlide />;
@@ -446,7 +446,8 @@ function WelcomeSlide({ next }: { next: () => void }) {
 // tour, and only opens the full journey (in a new tab) if they want depth.
 // ----------------------------------------------------------------------------
 
-function SixLivesSlide({ onClose: _onClose }: { onClose: () => void }) {
+function SixLivesSlide() {
+  // No props — tile clicks open an in-tour preview, not navigate away.
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   // Local Esc handler — closes the preview overlay (not the whole tour).
@@ -1111,7 +1112,7 @@ function YourTurnSlide({ onClose, onTraceSurname }: { onClose: () => void; onTra
           { folio: "Option 1", title: "Browse the figures", body: "Search 200+ historical figures by surname, decade, or country.", action: "explore" },
           { folio: "Option 2", title: "Trace a surname", body: "Match your family against passenger manifests and census records.", action: "surname" },
           { folio: "Option 3", title: "Upload a GEDCOM", body: "Bring your own family tree — we'll overlay it on the migration map.", action: "gedcom" },
-        ].map((opt, i) => (
+        ].map((opt) => (
           <motion.div
             key={opt.folio}
             variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}

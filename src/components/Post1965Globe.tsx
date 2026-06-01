@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   COUNTRY_COORDS,
   GATEWAYS,
-  YEAR_MIN,
   getYear,
   regionLabel,
   supplementalFlowsForYear,
