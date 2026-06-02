@@ -150,9 +150,8 @@ const SLIDES = [
   { label: "The map", folio: "Station III" },
   { label: "The globe", folio: "Station IV" },
   { label: "Composition over time", folio: "Station V" },
-  { label: "Stacked annual arrivals", folio: "Station VI" },
-  { label: "What could have been", folio: "Station VII" },
-  { label: "Your turn", folio: "Station VIII" },
+  { label: "What could have been", folio: "Station VI" },
+  { label: "Your turn", folio: "Station VII" },
 ] as const;
 
 type Props = {
@@ -350,9 +349,8 @@ function renderSlide(idx: number, ctx: SlideCtx) {
     case 3: return <MapSlide />;
     case 4: return <GlobeSlide />;
     case 5: return <CompositionSlide />;
-    case 6: return <StackedArrivalsSlide />;
-    case 7: return <CounterfactualSlide />;
-    case 8: return <YourTurnSlide onClose={ctx.onClose} onTraceSurname={ctx.onTraceSurname} />;
+    case 6: return <CounterfactualSlide />;
+    case 7: return <YourTurnSlide onClose={ctx.onClose} onTraceSurname={ctx.onTraceSurname} />;
     default: return null;
   }
 }
@@ -849,105 +847,15 @@ function CompositionSlide() {
       <div className="text-center">
         <p className="folio">Station V · Plate II · b — Composition over time</p>
         <h2 className="mt-3 font-display text-3xl leading-tight text-museum-text md:text-4xl">
-          The share of every region, every year.
-        </h2>
-        <p className="mx-auto mt-3 max-w-2xl font-serif text-sm leading-relaxed text-museum-muted">
-          Every annual cohort, stacked by region of origin. In 1965 the
-          bands are nearly all <span className="text-gold">European</span>.
-          By 2024, <span className="text-gold">Asia</span> and{" "}
-          <span className="text-gold">Latin America</span> dominate.
-          Press play to watch the playhead sweep, or click anywhere on the
-          chart to jump to that year.
-        </p>
-      </div>
-
-      <div className="mt-6">
-        <CompositionChart
-          year={year}
-          onScrub={(y) => {
-            setPlaying(false);
-            setYear(y);
-          }}
-        />
-      </div>
-
-      <div className="mt-4 flex flex-col items-center gap-3">
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => { setPlaying(false); setYear(Math.max(YEAR_MIN, year - 1)); }}
-            disabled={year <= YEAR_MIN}
-            className="border border-museum-border/20 bg-museum-bg/70 px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-museum-muted transition hover:border-gold/50 hover:text-gold disabled:opacity-30"
-            aria-label="Previous year"
-          >
-            ‹ Prev
-          </button>
-          <button
-            type="button"
-            onClick={togglePlay}
-            className="inline-flex items-center gap-2 border border-gold/50 bg-gold/[0.08] px-4 py-2 text-xs uppercase tracking-[0.22em] text-gold transition hover:border-gold hover:bg-gold/[0.16]"
-          >
-            <span aria-hidden>{playing ? "❚❚" : "▶"}</span>
-            <span>{playing ? "Pause" : "Play through 60 years"}</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => { setPlaying(false); setYear(Math.min(YEAR_MAX, year + 1)); }}
-            disabled={year >= YEAR_MAX}
-            className="border border-museum-border/20 bg-museum-bg/70 px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-museum-muted transition hover:border-gold/50 hover:text-gold disabled:opacity-30"
-            aria-label="Next year"
-          >
-            Next ›
-          </button>
-        </div>
-        {eventInfo && (
-          <p className="max-w-2xl text-center font-serif text-xs italic leading-snug text-museum-muted">
-            <span className="text-gold">{year}:</span> {eventInfo.event}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ----------------------------------------------------------------------------
-// SLIDE 6 · Stacked annual arrivals — the same chart, but framed around the
-// magnitude story (totals, peaks, troughs) instead of the regional shift.
-// Plays back from the chart's own perspective: starts at YEAR_MAX so the
-// reader sees the full six-decade silhouette first, then can scrub backward.
-// ----------------------------------------------------------------------------
-
-function StackedArrivalsSlide() {
-  const [year, setYear] = useState(YEAR_MAX);
-  const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    if (!playing) return;
-    const t = setTimeout(() => {
-      setYear((y) => (y >= YEAR_MAX ? YEAR_MIN : y + 1));
-    }, 600);
-    return () => clearTimeout(t);
-  }, [playing, year]);
-
-  const togglePlay = () => {
-    if (year >= YEAR_MAX) setYear(YEAR_MIN);
-    setPlaying((p) => !p);
-  };
-
-  return (
-    <div className="mx-auto flex h-full max-w-6xl flex-col px-6 py-8">
-      <div className="text-center">
-        <p className="folio">Station VI · Plate II · b</p>
-        <h2 className="mt-3 font-display text-3xl leading-tight text-museum-text md:text-4xl">
           Stacked annual arrivals by region, 1965 — 2024.
         </h2>
         <p className="mx-auto mt-3 max-w-2xl font-serif text-sm leading-relaxed text-museum-muted">
-          The same six decades, this time read for{" "}
-          <span className="text-gold">magnitude</span>. From{" "}
-          <span className="text-gold">~296K</span> in 1965 to the{" "}
-          <span className="text-gold">1.5M</span> IRCA peak of 1990, then a
-          gradual climb back through 2024. The dashed line is the total;
-          the bands show what made up each year&apos;s arrivals.
+          Every annual cohort, stacked by region of origin. The bands tell
+          two stories at once: the <span className="text-gold">share by region</span> shifts
+          dramatically (from nearly all European in 1965 to{" "}
+          <span className="text-gold">Asia and Latin America</span> by today),
+          and the <span className="text-gold">total</span> swells from ~296K
+          a year up to the IRCA spike of ~1.5M, then back down through 2024.
         </p>
       </div>
 
@@ -990,6 +898,8 @@ function StackedArrivalsSlide() {
             Next ›
           </button>
         </div>
+
+        {/* Magnitude waypoints — the key totals across the timeline. */}
         <div className="grid max-w-3xl grid-cols-2 gap-4 text-center md:grid-cols-4">
           {[
             { label: "1965 total", value: "~296K" },
@@ -1003,19 +913,25 @@ function StackedArrivalsSlide() {
             </div>
           ))}
         </div>
+
+        {eventInfo && (
+          <p className="max-w-2xl text-center font-serif text-xs italic leading-snug text-museum-muted">
+            <span className="text-gold">{year}:</span> {eventInfo.event}
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
 // ----------------------------------------------------------------------------
-// SLIDE 7 · Counterfactual — what could have been
+// SLIDE 6 · Counterfactual — what could have been
 // ----------------------------------------------------------------------------
 
 function CounterfactualSlide() {
   return (
     <div className="mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
-      <p className="folio">Station VII · The Counterfactual</p>
+      <p className="folio">Station VI · The Counterfactual</p>
       <h2 className="mt-4 font-display text-4xl leading-tight text-museum-text md:text-5xl">
         What if 1965 hadn&apos;t passed?
       </h2>
@@ -1094,7 +1010,7 @@ function CounterfactualSlide() {
 function YourTurnSlide({ onClose, onTraceSurname }: { onClose: () => void; onTraceSurname?: () => void }) {
   return (
     <div className="mx-auto flex h-full max-w-5xl flex-col items-center justify-center px-6 py-12 text-center">
-      <p className="folio">Station VIII · Now It&apos;s Your Turn</p>
+      <p className="folio">Station VII · Now It&apos;s Your Turn</p>
       <h2 className="mt-4 font-display text-4xl leading-tight text-museum-text md:text-5xl">
         Continue exploring.
       </h2>
