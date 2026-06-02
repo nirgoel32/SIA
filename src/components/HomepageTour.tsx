@@ -28,119 +28,15 @@ type Figure = {
   dates: string;
   route: string;
   note: string;
-  /** Hero arrival year highlighted in the preview. */
-  arrived: string;
-  /** 2–3 sentence narrative shown in the preview. */
-  summary: string;
-  /** 4–5 key moments shown as a mini timeline. */
-  moments: { year: string; label: string }[];
 };
 
 const FEATURED: Figure[] = [
-  {
-    href: "/journey?firstName=Marie&surname=Curie",
-    name: "Marie Skłodowska-Curie",
-    dates: "1867 – 1934",
-    route: "Warsaw → Paris",
-    note: "Physicist · two-time Nobel laureate",
-    arrived: "Paris, 1891",
-    summary:
-      "From Russian-occupied Warsaw to the laboratories of Paris. Marie crossed Europe at 23 to attend the Sorbonne — Polish women were barred from Russian-controlled universities. She would become the first person ever to win two Nobel Prizes, in two different sciences.",
-    moments: [
-      { year: "1867", label: "Born in Russian Warsaw" },
-      { year: "1885", label: "Joins the clandestine ‘Flying University’" },
-      { year: "1891", label: "Arrives in Paris; enrolls at the Sorbonne" },
-      { year: "1903", label: "First Nobel Prize (Physics)" },
-      { year: "1911", label: "Second Nobel Prize (Chemistry)" },
-    ],
-  },
-  {
-    href: "/journey?firstName=Albert&surname=Einstein",
-    name: "Albert Einstein",
-    dates: "1879 – 1955",
-    route: "Ulm → Berlin → Princeton",
-    note: "Refugee from Nazi Germany, 1933",
-    arrived: "Princeton, 1933",
-    summary:
-      "Born in newly-unified Germany, Einstein renounced his citizenship at sixteen and lived stateless for five years. He was on a US lecture tour when Hitler took power in 1933 — and never returned to Germany. He spent his final 22 years at Princeton's Institute for Advanced Study.",
-    moments: [
-      { year: "1879", label: "Born in Ulm, Württemberg" },
-      { year: "1905", label: "Annus mirabilis — four physics papers" },
-      { year: "1921", label: "Nobel Prize in Physics" },
-      { year: "1933", label: "Flees Germany for the Institute for Advanced Study" },
-      { year: "1940", label: "Becomes a US citizen" },
-    ],
-  },
-  {
-    href: "/journey?firstName=Hannah&surname=Arendt",
-    name: "Hannah Arendt",
-    dates: "1906 – 1975",
-    route: "Hanover → Paris → New York",
-    note: "Stateless 1937 – 1951; interned at Gurs",
-    arrived: "New York, 1941",
-    summary:
-      "Arrested by the Gestapo in 1933, Arendt fled Germany the same week. After eight years across Czechoslovakia, France, and Camp Gurs in Vichy France, she reached New York via Lisbon on emergency visas. She was stateless for 18 years.",
-    moments: [
-      { year: "1906", label: "Born in Hanover" },
-      { year: "1929", label: "PhD under Karl Jaspers in Heidelberg" },
-      { year: "1933", label: "Flees Germany via Czechoslovakia" },
-      { year: "1940", label: "Interned by Vichy France at Camp Gurs" },
-      { year: "1941", label: "Reaches New York via Marseille and Lisbon" },
-      { year: "1951", label: "US citizen; The Origins of Totalitarianism" },
-    ],
-  },
-  {
-    href: "/journey?firstName=Madeleine&surname=Albright",
-    name: "Madeleine Albright",
-    dates: "1937 – 2022",
-    route: "Prague → London → Denver",
-    note: "First woman U.S. Secretary of State",
-    arrived: "New York, 1948",
-    summary:
-      "Born in Prague three years before the Nazi invasion, she fled twice as a child — from Hitler in 1939, then from the Communists in 1948. She became a US citizen at 20, Secretary of State at 59, and learned only in middle age that three of her grandparents had died at Terezín and Auschwitz.",
-    moments: [
-      { year: "1937", label: "Born Marie Jana Korbelová in Prague" },
-      { year: "1939", label: "Family escapes Nazi invasion to London" },
-      { year: "1948", label: "Family flees Communist coup to the US" },
-      { year: "1957", label: "Becomes a US citizen; enrolls at Wellesley" },
-      { year: "1997", label: "First woman US Secretary of State" },
-    ],
-  },
-  {
-    href: "/journey?firstName=Andrew&surname=Carnegie",
-    name: "Andrew Carnegie",
-    dates: "1835 – 1919",
-    route: "Dunfermline → Pittsburgh",
-    note: "Steel king · arrived 1848 at age 12",
-    arrived: "New York, 1848",
-    summary:
-      "When power looms destroyed his weaver father's livelihood in Scotland, twelve-year-old Andrew crossed the Atlantic in steerage. He worked his way up from bobbin boy to telegrapher to railroad executive to steel king. By his death in 1919 he had given away ~$350 million to build 2,500 public libraries.",
-    moments: [
-      { year: "1835", label: "Born in Dunfermline, Scotland" },
-      { year: "1848", label: "Family sails from Glasgow to New York" },
-      { year: "1865", label: "Founds Keystone Bridge Company" },
-      { year: "1873", label: "Builds the Edgar Thomson Steel Works" },
-      { year: "1901", label: "Sells Carnegie Steel for $480M to JP Morgan" },
-      { year: "1919", label: "Dies having given away ~90% of his fortune" },
-    ],
-  },
-  {
-    href: "/journey?firstName=Sergey&surname=Brin",
-    name: "Sergey Brin",
-    dates: "born 1973",
-    route: "Moscow → Maryland → Stanford",
-    note: "Soviet-Jewish refugee, 1979 · co-founded Google",
-    arrived: "Maryland, 1979",
-    summary:
-      "Six-year-old Sergey Brin landed in College Park, Maryland in 1979 as one of ~28,000 Soviet-Jewish refugees admitted under the Jackson-Vanik amendment — a Cold-War immigration deal that conditioned US trade on the right of Soviet Jews to leave. Two decades later he co-founded Google.",
-    moments: [
-      { year: "1973", label: "Born in Moscow to mathematician parents" },
-      { year: "1979", label: "Family flees USSR via Vienna and Rome" },
-      { year: "1990", label: "Enters University of Maryland at 17" },
-      { year: "1995", label: "Meets Larry Page at Stanford" },
-      { year: "1998", label: "Google incorporated in a Menlo Park garage" },
-    ],
-  },
+  { href: "/journey?firstName=Marie&surname=Curie",       name: "Marie Skłodowska-Curie", dates: "1867 – 1934", route: "Warsaw → Paris",                  note: "Physicist · two-time Nobel laureate" },
+  { href: "/journey?firstName=Albert&surname=Einstein",   name: "Albert Einstein",        dates: "1879 – 1955", route: "Ulm → Berlin → Princeton",        note: "Refugee from Nazi Germany, 1933" },
+  { href: "/journey?firstName=Hannah&surname=Arendt",     name: "Hannah Arendt",          dates: "1906 – 1975", route: "Hanover → Paris → New York",      note: "Stateless 1937 – 1951; interned at Gurs" },
+  { href: "/journey?firstName=Madeleine&surname=Albright",name: "Madeleine Albright",     dates: "1937 – 2022", route: "Prague → London → Denver",        note: "First woman U.S. Secretary of State" },
+  { href: "/journey?firstName=Andrew&surname=Carnegie",   name: "Andrew Carnegie",        dates: "1835 – 1919", route: "Dunfermline → Pittsburgh",         note: "Steel king · arrived 1848 at age 12" },
+  { href: "/journey?firstName=Sergey&surname=Brin",       name: "Sergey Brin",            dates: "born 1973",   route: "Moscow → Maryland → Stanford",     note: "Soviet-Jewish refugee, 1979 · co-founded Google" },
 ];
 
 const SLIDES = [
@@ -439,206 +335,77 @@ function WelcomeSlide({ next }: { next: () => void }) {
 }
 
 // ----------------------------------------------------------------------------
-// SLIDE 1 · Six Lives — clicking a tile opens an IN-TOUR preview, not a new
-// page. The user reads the figure's story right here without leaving the
-// tour, and only opens the full journey (in a new tab) if they want depth.
+// SLIDE 1 · Six Lives — each tile opens the corresponding journey page in a
+// NEW TAB. No interim preview, no extra clicks. The new-tab behavior is what
+// keeps the tour open behind the journey page so the user doesn't lose their
+// place.
 // ----------------------------------------------------------------------------
 
 function SixLivesSlide() {
-  // No props — tile clicks open an in-tour preview, not navigate away.
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-
-  // Local Esc handler — closes the preview overlay (not the whole tour).
-  // The tour's outer keyboard listener also responds to Esc but that one
-  // is intercepted here because this fires first via stopPropagation.
-  useEffect(() => {
-    if (selectedIdx === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.stopPropagation();
-        setSelectedIdx(null);
-      }
-    };
-    document.addEventListener("keydown", onKey, true);
-    return () => document.removeEventListener("keydown", onKey, true);
-  }, [selectedIdx]);
-
   return (
     <div className="mx-auto flex h-full max-w-6xl flex-col px-6 py-8 md:py-12">
-      <AnimatePresence mode="wait">
-        {selectedIdx === null ? (
-          <motion.div
-            key="grid"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="flex h-full flex-col"
-          >
-            <div className="text-center">
-              <p className="folio">Station I · Six Real Lives</p>
-              <h2 className="mt-3 font-display text-4xl leading-tight text-museum-text md:text-5xl">
-                Start with a story.
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl font-serif text-base leading-relaxed text-museum-muted">
-                Six immigrants, six routes across the modern map. Click any
-                tile to read their story right here — you can open the full
-                interactive journey afterward.
-              </p>
-            </div>
-
-            <motion.ul
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.07 } },
-              }}
-              className="mt-10 grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
-            >
-              {FEATURED.map((fig, idx) => (
-                <motion.li
-                  key={fig.href}
-                  variants={{
-                    hidden: { opacity: 0, y: 14 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.45, ease }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedIdx(idx)}
-                    className="group flex h-full w-full flex-col border border-museum-border/15 bg-museum-surface/[0.03] p-5 text-left transition hover:-translate-y-0.5 hover:border-gold/60 hover:bg-museum-surface/[0.06]"
-                  >
-                    <div className="flex items-baseline justify-between">
-                      <p className="folio">Plate {String(idx + 1).padStart(2, "0")}</p>
-                      <span className="font-mono text-[10px] tracking-normal text-museum-faint">{fig.dates}</span>
-                    </div>
-                    <h3 className="mt-3 font-display text-xl leading-tight text-museum-text transition-colors group-hover:text-gold">
-                      {fig.name}
-                    </h3>
-                    <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-gold/90">
-                      {fig.route}
-                    </p>
-                    <p className="mt-3 font-serif text-xs leading-relaxed text-museum-muted">
-                      {fig.note}.
-                    </p>
-                    <p className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
-                      <span className="border-b border-gold/60 pb-0.5">Read the story</span>
-                      <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                    </p>
-                  </button>
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        ) : (
-          <FigurePreview
-            key={`preview-${selectedIdx}`}
-            figure={FEATURED[selectedIdx]}
-            onBack={() => setSelectedIdx(null)}
-          />
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-// In-tour preview for a single figure. Renders inside the Six Lives slide
-// instead of navigating away. "See full interactive journey" opens the
-// journey page in a new tab so the tour stays open in the original tab.
-function FigurePreview({ figure, onBack }: { figure: Figure; onBack: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 24 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 24 }}
-      transition={{ duration: 0.35, ease }}
-      className="flex h-full flex-col"
-    >
-      {/* Back row */}
-      <div className="flex items-center justify-between">
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 border border-museum-border/20 bg-museum-bg/70 px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-museum-muted transition hover:border-gold/60 hover:text-gold"
-        >
-          <span aria-hidden>←</span>
-          <span>Back to six lives</span>
-        </button>
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-museum-faint">
-          One of six
+      <div className="text-center">
+        <p className="folio">Station I · Six Real Lives</p>
+        <h2 className="mt-3 font-display text-4xl leading-tight text-museum-text md:text-5xl">
+          Start with a story.
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl font-serif text-base leading-relaxed text-museum-muted">
+          Six immigrants, six routes across the modern map. Click any tile
+          to open that person&apos;s full interactive journey in a new tab —
+          the tour stays open here so you can come back when you&apos;re done.
+        </p>
+        <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-museum-faint">
+          ↗ Each tile opens in a new tab
         </p>
       </div>
 
-      {/* Hero */}
-      <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-[3fr_2fr]">
-        <div>
-          <p className="folio">{figure.dates}</p>
-          <h2 className="mt-3 font-display text-4xl leading-tight text-museum-text md:text-5xl">
-            {figure.name}
-          </h2>
-          <p className="mt-3 font-mono text-xs uppercase tracking-[0.22em] text-gold">
-            {figure.route}
-          </p>
-          <p className="mt-6 font-serif text-base leading-relaxed text-museum-muted">
-            {figure.summary}
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+      <motion.ul
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.07 } },
+        }}
+        className="mt-10 grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {FEATURED.map((fig, idx) => (
+          <motion.li
+            key={fig.href}
+            variants={{
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.45, ease }}
+          >
             <a
-              href={figure.href}
+              href={fig.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-gold/50 bg-gold/[0.08] px-4 py-2 text-xs uppercase tracking-[0.22em] text-gold transition hover:border-gold hover:bg-gold/[0.16]"
-              title="Opens the full interactive journey in a new tab"
+              title={`Open ${fig.name}'s journey in a new tab`}
+              className="group flex h-full w-full flex-col border border-museum-border/15 bg-museum-surface/[0.03] p-5 text-left transition hover:-translate-y-0.5 hover:border-gold/60 hover:bg-museum-surface/[0.06]"
             >
-              <span>See full interactive journey</span>
-              <span aria-hidden>↗</span>
+              <div className="flex items-baseline justify-between">
+                <p className="folio">Plate {String(idx + 1).padStart(2, "0")}</p>
+                <span className="font-mono text-[10px] tracking-normal text-museum-faint">{fig.dates}</span>
+              </div>
+              <h3 className="mt-3 font-display text-xl leading-tight text-museum-text transition-colors group-hover:text-gold">
+                {fig.name}
+              </h3>
+              <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-gold/90">
+                {fig.route}
+              </p>
+              <p className="mt-3 font-serif text-xs leading-relaxed text-museum-muted">
+                {fig.note}.
+              </p>
+              <p className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[11px] font-medium uppercase tracking-[0.18em] text-gold">
+                <span className="border-b border-gold/60 pb-0.5">Open journey</span>
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">↗</span>
+              </p>
             </a>
-            <button
-              type="button"
-              onClick={onBack}
-              className="text-xs uppercase tracking-[0.22em] text-museum-muted underline-offset-4 transition hover:text-gold hover:underline"
-            >
-              Or continue the tour →
-            </button>
-          </div>
-
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-museum-faint">
-            ↗ Opens in a new tab so the tour stays open here.
-          </p>
-        </div>
-
-        {/* Mini timeline of key moments */}
-        <div className="border border-museum-border/15 bg-museum-surface/[0.03] p-5">
-          <p className="folio">Arrived {figure.arrived}</p>
-          <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-museum-muted">
-            Key moments
-          </p>
-          <ol className="mt-4 space-y-3 border-l border-museum-border/20">
-            {figure.moments.map((m, i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 * i + 0.15, duration: 0.4, ease }}
-                className="relative pl-4"
-              >
-                <span
-                  aria-hidden
-                  className="absolute left-[-4px] top-1.5 block h-1.5 w-1.5 rounded-full bg-gold"
-                />
-                <p className="font-mono text-xs text-gold">{m.year}</p>
-                <p className="mt-0.5 font-serif text-sm leading-snug text-museum-text">
-                  {m.label}
-                </p>
-              </motion.li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </motion.div>
+          </motion.li>
+        ))}
+      </motion.ul>
+    </div>
   );
 }
 
